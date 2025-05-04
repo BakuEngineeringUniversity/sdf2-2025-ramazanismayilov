@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevToys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./css/output.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .gradient-header {
+            background: linear-gradient(to bottom, #9333ea, transparent);
+            padding: 24px;
+            border-radius: 6px;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            transition: all 0.2s ease-in-out;
+        }
+
+        #sidebar {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .sidebar-visible {
+            transform: translateX(0);
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="flex h-screen">
+        <div id="sidebar"
+            class="w-64 max-w-150 bg-white dark:bg-gray-800 shadow-md transform transition-all duration-300">
+            <div class="p-4 flex items-center border-b border-gray-200 dark:border-gray-700">
+                <div class="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center text-white mr-2">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h1 class="text-xl font-semibold">DevToys</h1>
+            </div>
+
+            <nav class="py-4">
+                <div class="flex items-center mb-4">
+                    <div class="relative flex items-center justify-center px-4 w-full">
+                        <input type="text" placeholder="Search tools..."
+                            class="bg-gray-100 w-full dark:bg-gray-700  rounded-md py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="fas fa-search absolute left-7 top-3 text-gray-400"></i>
+                    </div>
+
+                </div>
+                <a href="#"
+                    class="flex items-center px-4 py-2 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900 bg-opacity-40 dark:bg-opacity-20 border-l-4 border-blue-500">
+                    <i class="fas fa-home w-5 text-center mr-2"></i>
+                    <span>All tools</span>
+                </a>
+
+                <a href="#"
+                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-code w-5 text-center mr-2"></i>
+                    <span>Formatters</span>
+                </a>
+                <a href="#"
+                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-exchange-alt w-5 text-center mr-2"></i>
+                    <span>Converters</span>
+                </a>
+                <a href="#"
+                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-random w-5 text-center mr-2"></i>
+                    <span>Generators</span>
+                </a>
+                <a href="#"
+                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-file-signature w-5 text-center mr-2"></i>
+                    <span>Encoders/Decoders</span>
+                </a>
+                <a href="#"
+                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-tachometer-alt w-5 text-center mr-2"></i>
+                    <span>Testers</span>
+                </a>
+            </nav>
+
+            <div class="absolute bottom-0 w-64 border-t border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-3">
+                <a href="#"
+                    class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    <i class="fas fa-heart mr-2"></i>
+                    <span>Support the development</span>
+                </a>
+                <a href="#"
+                    class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    <i class="fas fa-puzzle-piece mr-2"></i>
+                    <span>Manage extensions</span>
+                </a>
+                <a href="#"
+                    class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    <i class="fas fa-cog mr-2"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </div>
+
+        <div id="mainContent" class="flex-1 overflow-auto transition-all duration-300">
+            <div class="bg-white dark:bg-gray-800 p-4 shadow-sm flex justify-between items-center">
+                <div class="flex items-center">
+                    <button id="sidebarToggle"
+                        class="p-2 mr-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 class="text-lg font-medium">All tools</h2>
+                </div>
+            </div>
+
+            <div>
+                <div class="gradient-header">
+                    <div class="title">
+                        <h1 class="text-[40px] mb-3">Welcome to DevToys</h1>
+                        <hr>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
+                    <div
+                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h4 class="font-medium">Base64 Image Encoder / <br> Decoder</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Encode and decode Base64 image <br> data</p>
+                    </div>
+                    <div
+                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center text-green-600 dark:text-green-400 mr-3">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h4 class="font-medium">Base64 Text Encoder / <br> Decoder</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Encode and decode Base64 text <br> data
+                        </p>
+                    </div>
+                    <div
+                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 mr-3">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                            <h4 class="font-medium">Certifcate Decoder</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Decode a certifcate</p>
+                    </div>
+                    <div
+                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center text-red-600 dark:text-red-400 mr-3">
+                                <i class="fas fa-compress-alt"></i>
+                            </div>
+                            <h4 class="font-medium">Color Blindness <br> Simulator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Simulate color blindness on a <br> picture
+                            or screenshot</p>
+                    </div>
+                    <div
+                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center text-yellow-600 dark:text-yellow-400 mr-3">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h4 class="font-medium">Cron expression parser</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Parse Cron expression to get <br> scheduled
+                            dates</p>
+                    </div>
+                    <div
+                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div
+                                class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <h4 class="font-medium">Date Converter</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Convert date to human-readable <br> date and
+                            vice versa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
