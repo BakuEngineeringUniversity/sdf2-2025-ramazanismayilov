@@ -2,209 +2,446 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevToys</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./css/output.css">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        .gradient-header {
-            background: linear-gradient(to bottom, #9333ea, transparent);
-            padding: 24px;
-            border-radius: 6px;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-2px);
-            transition: all 0.2s ease-in-out;
-        }
-
-        #sidebar {
-            transition: all 0.3s ease-in-out;
-            overflow: hidden;
-        }
-
-        .sidebar-visible {
-            transform: translateX(0);
-        }
-
-        .sidebar-hidden {
-            transform: translateX(-100%);
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevToys Clone</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-    <div class="flex h-screen">
-        <div id="sidebar"
-            class="w-64 max-w-150 bg-white dark:bg-gray-800 shadow-md transform transition-all duration-300">
-            <div class="p-4 flex items-center border-b border-gray-200 dark:border-gray-700">
-                <div class="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center text-white mr-2">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <h1 class="text-xl font-semibold">DevToys</h1>
+<body>
+    <div class="app">
+        <aside id="sidebar" class="sidebar">
+            <div class="logo">DevToys</div>
+            <div class="search-container">
+                <i onclick="toggleSidebar()" class="fa-solid fa-bars toggle-btn"></i>
+                <input type="text" class="search" placeholder="Type to search for tools..." id="search-input" />
             </div>
 
-            <nav class="py-4">
-                <div class="flex items-center mb-4">
-                    <div class="relative flex items-center justify-center px-4 w-full">
-                        <input type="text" placeholder="Search tools..."
-                            class="bg-gray-100 w-full dark:bg-gray-700  rounded-md py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <i class="fas fa-search absolute left-7 top-3 text-gray-400"></i>
-                    </div>
-
+            <nav class="menu">
+                <div class="menu-group" onclick="showAllTools()">
+                    <i class="fas fa-home"></i>
+                    <div class="menu-item">All tools</div>
                 </div>
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900 bg-opacity-40 dark:bg-opacity-20 border-l-4 border-blue-500">
-                    <i class="fas fa-home w-5 text-center mr-2"></i>
-                    <span>All tools</span>
-                </a>
 
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <i class="fas fa-code w-5 text-center mr-2"></i>
-                    <span>Formatters</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <i class="fas fa-exchange-alt w-5 text-center mr-2"></i>
-                    <span>Converters</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <i class="fas fa-random w-5 text-center mr-2"></i>
-                    <span>Generators</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <i class="fas fa-file-signature w-5 text-center mr-2"></i>
-                    <span>Encoders/Decoders</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <i class="fas fa-tachometer-alt w-5 text-center mr-2"></i>
-                    <span>Testers</span>
-                </a>
+                <div class="menu-group">
+                    <i class="fas fa-layer-group"></i>
+                    <div class="menu-header">Converters</div>
+                </div>
+
+                <div class="menu-group">
+                    <i class="fas fa-code"></i>
+                    <div class="menu-header">Encoders / Decoders</div>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" onclick="showTool('base64-image')">Base64 Image Encoder / Decoder</div>
+                    <div class="menu-item" onclick="showTool('base64-text')">Base64 Text Encoder / Decoder</div>
+                    <div class="menu-item" onclick="showTool('certificate')">Certificate Decoder</div>
+                </div>
+
+                <div class="menu-group">
+                    <i class="fas fa-terminal"></i>
+                    <div class="menu-header">Formatters</div>
+                </div>
+
+                <div class="menu-group">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div class="menu-header">Generators</div>
+                </div>
+
+                <div class="menu-group">
+                    <i class="fas fa-image"></i>
+                    <div class="menu-header">Graphic</div>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" onclick="showTool('color-blindness')">Color Blindness Simulator</div>
+                </div>
+
+                <div class="menu-group">
+                    <i class="fas fa-link"></i>
+                    <div class="menu-header">Testers</div>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" onclick="showTool('cron-parser')">Cron Expression Parser</div>
+                </div>
+
+                <div class="menu-group">
+                    <i class="fas fa-font"></i>
+                    <div class="menu-header">Text</div>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" onclick="showTool('date-converter')">Date Converter</div>
+                </div>
             </nav>
 
-            <div class="absolute bottom-0 w-64 border-t border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-3">
-                <a href="#"
-                    class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                    <i class="fas fa-heart mr-2"></i>
-                    <span>Support the development</span>
-                </a>
-                <a href="#"
-                    class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                    <i class="fas fa-puzzle-piece mr-2"></i>
-                    <span>Manage extensions</span>
-                </a>
-                <a href="#"
-                    class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                    <i class="fas fa-cog mr-2"></i>
-                    <span>Settings</span>
-                </a>
+            <div class="footer">
+                <div class="footer-item"><i class="fas fa-cog"></i> Settings</div>
+                <div class="footer-item"><i class="fas fa-puzzle-piece"></i> Manage extensions</div>
+                <div class="footer-item"><i class="fas fa-heart"></i> Support the development</div>
             </div>
-        </div>
+        </aside>
 
-        <div id="mainContent" class="flex-1 overflow-auto transition-all duration-300">
-            <div class="bg-white dark:bg-gray-800 p-4 shadow-sm flex justify-between items-center">
-                <div class="flex items-center">
-                    <button id="sidebarToggle"
-                        class="p-2 mr-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h2 class="text-lg font-medium">All tools</h2>
+        <main class="main">
+            <!-- Home Screen -->
+            <div id="home-screen" class="tool-content active">
+                <h1>Welcome to DevToys</h1>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="showTool('base64-image')">
+                        <div class="icon">🖼️</div>
+                        <div class="title">Base64 Image Encoder / Decoder</div>
+                        <div class="desc">Encode and decode Base64 image data</div>
+                    </div>
+
+                    <div class="tool-card" onclick="showTool('base64-text')">
+                        <div class="icon">🔤</div>
+                        <div class="title">Base64 Text Encoder / Decoder</div>
+                        <div class="desc">Encode and decode Base64 text data</div>
+                    </div>
+
+                    <div class="tool-card" onclick="showTool('certificate')">
+                        <div class="icon">📜</div>
+                        <div class="title">Certificate Decoder</div>
+                        <div class="desc">Decode a certificate</div>
+                    </div>
+
+                    <div class="tool-card" onclick="showTool('color-blindness')">
+                        <div class="icon">🌈</div>
+                        <div class="title">Color Blindness Simulator</div>
+                        <div class="desc">Simulate color blindness on a picture or screenshot</div>
+                    </div>
+
+                    <div class="tool-card" onclick="showTool('cron-parser')">
+                        <div class="icon">🕒</div>
+                        <div class="title">Cron Expression Parser</div>
+                        <div class="desc">Parse Cron expressions to get scheduled dates</div>
+                    </div>
+
+                    <div class="tool-card" onclick="showTool('date-converter')">
+                        <div class="icon">📅</div>
+                        <div class="title">Date Converter</div>
+                        <div class="desc">Convert date to human-readable and vice versa</div>
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <div class="gradient-header">
-                    <div class="title">
-                        <h1 class="text-[40px] mb-3">Welcome to DevToys</h1>
-                        <hr>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
-                    <div
-                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <h4 class="font-medium">Base64 Image Encoder / <br> Decoder</h4>
+            <!-- Base64 Image Encoder/Decoder -->
+            <div id="base64-image" class="tool-content">
+                <h1>Base64 Image Encoder / Decoder</h1>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Mode</h2>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Encode and decode Base64 image <br> data</p>
-                    </div>
-                    <div
-                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center text-green-600 dark:text-green-400 mr-3">
-                                <i class="fas fa-exchange-alt"></i>
-                            </div>
-                            <h4 class="font-medium">Base64 Text Encoder / <br> Decoder</h4>
+                        <div class="mode-selector">
+                            <button class="mode-btn active" data-mode="encode"
+                                onclick="setBase64ImageMode('encode')">Encode</button>
+                            <button class="mode-btn" data-mode="decode"
+                                onclick="setBase64ImageMode('decode')">Decode</button>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Encode and decode Base64 text <br> data
-                        </p>
                     </div>
-                    <div
-                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 mr-3">
-                                <i class="fas fa-hashtag"></i>
-                            </div>
-                            <h4 class="font-medium">Certifcate Decoder</h4>
+
+                    <div class="tool-section" id="image-input-section">
+                        <div class="section-header">
+                            <h2>Image Input</h2>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Decode a certifcate</p>
+                        <div class="input-area">
+                            <div class="file-upload">
+                                <input type="file" id="image-file" accept="image/*" onchange="handleImageUpload()" />
+                                <label for="image-file">Choose Image</label>
+                            </div>
+                            <div class="preview-container">
+                                <img id="image-preview" src="" alt="Preview" />
+                            </div>
+                        </div>
                     </div>
-                    <div
-                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center text-red-600 dark:text-red-400 mr-3">
-                                <i class="fas fa-compress-alt"></i>
-                            </div>
-                            <h4 class="font-medium">Color Blindness <br> Simulator</h4>
+
+                    <div class="tool-section" id="base64-input-section" style="display: none;">
+                        <div class="section-header">
+                            <h2>Base64 Input</h2>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Simulate color blindness on a <br> picture
-                            or screenshot</p>
+                        <div class="input-area">
+                            <textarea id="base64-input"
+                                placeholder="Paste Base64 encoded image data here..."></textarea>
+                            <button class="action-btn" onclick="decodeBase64Image()">Decode</button>
+                        </div>
                     </div>
-                    <div
-                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center text-yellow-600 dark:text-yellow-400 mr-3">
-                                <i class="fas fa-palette"></i>
-                            </div>
-                            <h4 class="font-medium">Cron expression parser</h4>
+
+                    <div class="tool-section" id="base64-output-section">
+                        <div class="section-header">
+                            <h2>Base64 Output</h2>
+                            <button class="action-btn" onclick="copyToClipboard('base64-output')">Copy</button>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Parse Cron expression to get <br> scheduled
-                            dates</p>
+                        <div class="output-area">
+                            <textarea id="base64-output" readonly></textarea>
+                        </div>
                     </div>
-                    <div
-                        class="tool-card bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md cursor-pointer p-5 border border-transparent hover:border-blue-500">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-3">
-                                <i class="fas fa-qrcode"></i>
-                            </div>
-                            <h4 class="font-medium">Date Converter</h4>
+
+                    <div class="tool-section" id="image-output-section" style="display: none;">
+                        <div class="section-header">
+                            <h2>Decoded Image</h2>
+                            <button class="action-btn" onclick="downloadDecodedImage()">Download</button>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Convert date to human-readable <br> date and
-                            vice versa</p>
+                        <div class="output-area">
+                            <img id="decoded-image" src="" alt="Decoded Image" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Base64 Text Encoder/Decoder -->
+            <div id="base64-text" class="tool-content">
+                <h1>Base64 Text Encoder / Decoder</h1>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Mode</h2>
+                        </div>
+                        <div class="mode-selector">
+                            <button class="mode-btn active" data-mode="encode"
+                                onclick="setBase64TextMode('encode')">Encode</button>
+                            <button class="mode-btn" data-mode="decode"
+                                onclick="setBase64TextMode('decode')">Decode</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2 id="text-input-label">Text Input</h2>
+                            <button class="action-btn" onclick="clearText('text-input')">Clear</button>
+                        </div>
+                        <div class="input-area">
+                            <textarea id="text-input" placeholder="Enter text to encode or decode..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2 id="text-output-label">Base64 Output</h2>
+                            <div class="button-group">
+                                <button class="action-btn" onclick="processBase64Text()">Convert</button>
+                                <button class="action-btn" onclick="copyToClipboard('text-output')">Copy</button>
+                            </div>
+                        </div>
+                        <div class="output-area">
+                            <textarea id="text-output" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Decoder -->
+            <div id="certificate" class="tool-content">
+                <h1>Certificate Decoder</h1>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Certificate Input</h2>
+                            <button class="action-btn" onclick="clearText('cert-input')">Clear</button>
+                        </div>
+                        <div class="input-area">
+                            <textarea id="cert-input"
+                                placeholder="Paste your certificate (PEM format) here..."></textarea>
+                            <div class="file-upload">
+                                <input type="file" id="cert-file" accept=".pem,.cer,.crt"
+                                    onchange="handleCertFileUpload()" />
+                                <label for="cert-file">Upload Certificate</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Certificate Details</h2>
+                            <button class="action-btn" onclick="decodeCertificate()">Decode</button>
+                        </div>
+                        <div class="output-area cert-output">
+                            <div id="cert-details">
+                                <p>Certificate information will appear here after decoding</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Blindness Simulator -->
+            <div id="color-blindness" class="tool-content">
+                <h1>Color Blindness Simulator</h1>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Image Input</h2>
+                        </div>
+                        <div class="input-area">
+                            <div class="file-upload">
+                                <input type="file" id="color-image-file" accept="image/*"
+                                    onchange="handleColorBlindnessImageUpload()" />
+                                <label for="color-image-file">Choose Image</label>
+                            </div>
+                            <div class="preview-container">
+                                <img id="color-image-preview" src="" alt="Preview" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Color Blindness Type</h2>
+                        </div>
+                        <div class="color-blindness-types">
+                            <button class="color-type-btn" onclick="simulateColorBlindness('protanopia')">Protanopia
+                                (Red Blind)</button>
+                            <button class="color-type-btn" onclick="simulateColorBlindness('deuteranopia')">Deuteranopia
+                                (Green Blind)</button>
+                            <button class="color-type-btn" onclick="simulateColorBlindness('tritanopia')">Tritanopia
+                                (Blue Blind)</button>
+                            <button class="color-type-btn"
+                                onclick="simulateColorBlindness('achromatopsia')">Achromatopsia (Monochrome)</button>
+                            <button class="color-type-btn" onclick="simulateColorBlindness('normal')">Normal
+                                Vision</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Simulated Image</h2>
+                            <button class="action-btn" onclick="downloadSimulatedImage()">Download</button>
+                        </div>
+                        <div class="output-area">
+                            <img id="color-blind-preview" src="" alt="Simulated Image" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cron Expression Parser -->
+            <div id="cron-parser" class="tool-content">
+                <h1>Cron Expression Parser</h1>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Cron Expression</h2>
+                        </div>
+                        <div class="input-area">
+                            <input type="text" id="cron-input" placeholder="Enter cron expression (e.g., 0 0 * * *)" />
+                            <button class="action-btn" onclick="parseCronExpression()">Parse</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Cron Field Description</h2>
+                        </div>
+                        <div class="cron-explanation">
+                            <div class="cron-field">
+                                <div class="field-name">Minutes</div>
+                                <div class="field-value" id="cron-minutes"></div>
+                            </div>
+                            <div class="cron-field">
+                                <div class="field-name">Hours</div>
+                                <div class="field-value" id="cron-hours"></div>
+                            </div>
+                            <div class="cron-field">
+                                <div class="field-name">Day of Month</div>
+                                <div class="field-value" id="cron-dom"></div>
+                            </div>
+                            <div class="cron-field">
+                                <div class="field-name">Month</div>
+                                <div class="field-value" id="cron-month"></div>
+                            </div>
+                            <div class="cron-field">
+                                <div class="field-name">Day of Week</div>
+                                <div class="field-value" id="cron-dow"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Next Execution Times</h2>
+                        </div>
+                        <div class="output-area">
+                            <div id="cron-next-dates"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Converter -->
+            <div id="date-converter" class="tool-content">
+                <h1>Date Converter</h1>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Date Input</h2>
+                        </div>
+                        <div class="date-input-options">
+                            <div class="input-option">
+                                <label>
+                                    <input type="radio" name="date-input-type" value="timestamp" checked
+                                        onchange="toggleDateInputFields()">
+                                    Unix Timestamp
+                                </label>
+                            </div>
+                            <div class="input-option">
+                                <label>
+                                    <input type="radio" name="date-input-type" value="datetime"
+                                        onchange="toggleDateInputFields()">
+                                    Date and Time
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-area" id="timestamp-input-area">
+                            <input type="number" id="timestamp-input"
+                                placeholder="Enter Unix timestamp (e.g., 1620000000)" />
+                            <button class="action-btn" onclick="convertFromTimestamp()">Convert</button>
+                        </div>
+                        <div class="input-area" id="datetime-input-area" style="display: none;">
+                            <input type="datetime-local" id="datetime-input" />
+                            <button class="action-btn" onclick="convertFromDateTime()">Convert</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-section">
+                        <div class="section-header">
+                            <h2>Conversion Results</h2>
+                        </div>
+                        <div class="date-results">
+                            <div class="result-row">
+                                <div class="result-label">Unix Timestamp:</div>
+                                <div class="result-value" id="unix-timestamp-result"></div>
+                                <button class="copy-btn"
+                                    onclick="copyToClipboard('unix-timestamp-result')">Copy</button>
+                            </div>
+                            <div class="result-row">
+                                <div class="result-label">Local Date:</div>
+                                <div class="result-value" id="local-date-result"></div>
+                                <button class="copy-btn" onclick="copyToClipboard('local-date-result')">Copy</button>
+                            </div>
+                            <div class="result-row">
+                                <div class="result-label">UTC Date:</div>
+                                <div class="result-value" id="utc-date-result"></div>
+                                <button class="copy-btn" onclick="copyToClipboard('utc-date-result')">Copy</button>
+                            </div>
+                            <div class="result-row">
+                                <div class="result-label">ISO 8601:</div>
+                                <div class="result-value" id="iso-date-result"></div>
+                                <button class="copy-btn" onclick="copyToClipboard('iso-date-result')">Copy</button>
+                            </div>
+                            <div class="result-row">
+                                <div class="result-label">RFC 2822:</div>
+                                <div class="result-value" id="rfc-date-result"></div>
+                                <button class="copy-btn" onclick="copyToClipboard('rfc-date-result')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
